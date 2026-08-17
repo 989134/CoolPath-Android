@@ -1,6 +1,6 @@
-# HeatSafe Agent
+# CoolPath
 
-HeatSafe Agent 是一個 Android 智慧城市 MVP：一般導航找最快路線，本 App 結合即時天氣、步行路線與沿途補給／避暑點，先用可重現的 Kotlin heuristic 計算熱風險，再讓 Gemini Decision Agent 選擇保留、提醒或改走替代路線。
+CoolPath 是一個 Android 智慧城市 MVP：一般導航找最快路線，本 App 結合即時天氣、步行路線與沿途補給／避暑點，先用可重現的 Kotlin heuristic 計算熱風險，再讓 Gemini Decision Agent 選擇保留、提醒或改走替代路線。
 
 > This score is a prototype decision heuristic and is not a medical risk assessment.
 
@@ -16,7 +16,7 @@ HeatSafe Agent 是一個 Android 智慧城市 MVP：一般導航找最快路線�
 - deterministic Heat Risk Score + Firebase AI Logic/Gemini JSON 決策；AI 失敗時仍可使用
 - WorkManager 出發前 20 分鐘工作與 HIGH/MEDIUM Android 通知
 - 單一輕量工具 App：設定頁 + 背景分析 + 使用者可選的可拖曳懸浮球（不需第二個 App）
-- 一鍵把推薦步行路線交給外部 Google Maps；Google Maps 在前景導航時，HeatSafe location foreground service 約每 5 分鐘同步更新分析
+- 一鍵把推薦步行路線交給外部 Google Maps；Google Maps 在前景導航時，CoolPath location foreground service 約每 5 分鐘同步更新分析
 - 神盾式背景 HUD：GPS 約每 5 秒更新；雲端 Weather／Routes／Places／Gemini 每 5 分鐘更新，移動超過 250m 且滿 2 分鐘時可提前重算
 - 未設定金鑰或網路/API 失敗時，自動使用完整 Mock Demo 並顯示 `DEMO MODE`
 
@@ -87,7 +87,7 @@ GOOGLE_MAPS_WEB_API_KEY=YOUR_ROUTES_WEATHER_RESTRICTED_KEY
 3. 啟動 API 26+ 且含 Google Play services 的 emulator，或連接實機。
 4. 執行 `app`，允許定位與通知權限。
 5. 若要使用懸浮球，在首頁開啟開關並於系統頁允許「顯示在其他 App 上層」。懸浮球使用有常駐通知的 foreground service，可隨時從通知或首頁關閉。
-6. 分析完成後點「在 Google Maps 開始步行導航」。HeatSafe 會留在背景，懸浮球會覆蓋於 Google Maps 上方；點擊懸浮球展開最新風險、原因與更新時間。
+6. 分析完成後點「在 Google Maps 開始步行導航」。CoolPath 會留在背景，懸浮球會覆蓋於 Google Maps 上方；點擊懸浮球展開最新風險、原因與更新時間。
 7. 收合 HUD 顯示風險圖示與體感溫度；展開後顯示 3×3 氣溫採樣、UV、GPS 速度、最近補給／避暑點，底部按鈕可把較安全路線重新交給 Google Maps。
 
 命令列驗證：
@@ -110,7 +110,7 @@ Debug APK：`app/build/outputs/apk/debug/app-debug.apk`。
 
 WorkManager 是延遲且可由系統批次處理的背景工作，不是 exact alarm，因此「出發前 20 分鐘」不保證精準到秒。Hackathon 現場請使用 Demo 按鈕即時觸發。
 
-導航中的同步分析由使用者主動開啟的 foreground service 執行，預設每 5 分鐘更新一次，以平衡即時性、電量與 Google API request 數量。Android 不允許第三方 App 修改 Google Maps 內部 UI 或 polyline；HeatSafe 透過官方 Maps URL 開啟步行方向，並用自己的系統 overlay 顯示分析結果。
+導航中的同步分析由使用者主動開啟的 foreground service 執行，預設每 5 分鐘更新一次，以平衡即時性、電量與 Google API request 數量。Android 不允許第三方 App 修改 Google Maps 內部 UI 或 polyline；CoolPath 透過官方 Maps URL 開啟步行方向，並用自己的系統 overlay 顯示分析結果。
 
 ## Next step
 
